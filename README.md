@@ -1,1 +1,1 @@
-VRSQUADProto
+VR Squad - Prototype
