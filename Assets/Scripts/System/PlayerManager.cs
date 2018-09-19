@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour {
     public OVRPlayerController playerController;
 
     public Image blackScreen;
+    public Slider loadingSlider;
     public float fadeSpeed = 0.05f;
     public float fadeStrength = 0.025f;
     private bool isSceneLoading = false;
@@ -21,6 +22,9 @@ public class PlayerManager : MonoBehaviour {
     // Use this for initialization
     void Awake ()
     {
+
+        loadingSlider.gameObject.SetActive(false);
+
         if (playerManagerInst == null)
         {
             playerManagerInst = this; // In first scene, make us the singleton.
@@ -52,11 +56,16 @@ public class PlayerManager : MonoBehaviour {
         }
 
 
+        loadingSlider.gameObject.SetActive(true);
+        
+
         // On attends que la scène se load
         asyncLoadLevel = SceneManager.LoadSceneAsync(index, LoadSceneMode.Single);
         while (!asyncLoadLevel.isDone)
         {
-            yield return null;
+            // Update de la barre de chargement
+           loadingSlider.value = asyncLoadLevel.progress;
+           yield return null;
         }
 
 
@@ -76,6 +85,7 @@ public class PlayerManager : MonoBehaviour {
             yield return new WaitForSeconds(fadeSpeed);
         }
         isSceneLoading = false;
+        loadingSlider.gameObject.SetActive(false);
         yield break;
     }
 
