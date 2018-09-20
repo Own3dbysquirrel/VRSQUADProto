@@ -28,8 +28,12 @@ public class KeyboardInput : MonoBehaviour {
 
     public void AddCharacter(string character)
     {
+        if (isMaj)
+            character.ToUpper();
+        else
+            character.ToLower();
+
         inputFields[currentSelectedField].text += character;
-        Debug.Log(character);
     }
 
     public void RemoveLastCharacter()
