@@ -28,12 +28,14 @@ public class KeyboardInput : MonoBehaviour {
 
     public void AddCharacter(string character)
     {
-        if (isMaj)
-            character.ToUpper();
-        else
-            character.ToLower();
+        string chara;
 
-        inputFields[currentSelectedField].text += character;
+        if (isMaj)
+           chara = character.ToUpper();
+        else
+            chara = character.ToLower();
+
+        inputFields[currentSelectedField].text += chara;
     }
 
     public void RemoveLastCharacter()
@@ -49,14 +51,6 @@ public class KeyboardInput : MonoBehaviour {
 
     public void SelectInputField(int i)
     {
-        currentSelectedField = i;
-
-        foreach(InputField field in inputFields)
-        {
-            field.interactable = false;
-        }
-
-        inputFields[i].interactable = true;
         currentSelectedField = i;
     }
 
@@ -92,11 +86,14 @@ public class KeyboardInput : MonoBehaviour {
 
     public void Confirm()
     {
-
         // Lancer la formation en outrepassant la requête serveur
         if(inputFields[0].text == "admin" && inputFields[1].text == "admin")
         {
             gameObject.SetActive(false);
-        }       
+        }
+        else
+        {
+            GetComponent<ServerDataRequest>().LoginValidate();
+        }
     }
 }

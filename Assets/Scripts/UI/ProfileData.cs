@@ -12,9 +12,10 @@ public class ProfileData : MonoBehaviour {
     public Image profileImage;
 
     public ProfileSelection profileSelec;
-
+/*
     public void ShowProfile()
     {
         profileSelec.UpdateProfileInfo(fullName, job, company, profileImage.sprite, gameObject);
     }
+    */
 }

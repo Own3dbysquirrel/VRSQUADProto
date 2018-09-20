@@ -13,18 +13,12 @@ public class ProfileSelection : MonoBehaviour {
 
     public GameObject buttonClicked;
 
-    public void UpdateProfileInfo(string fullName, string job, string company, Sprite profileImg, GameObject clickOrigin)
+    public void UpdateProfileInfo(ServerDataRequest.UserProfile profile)
     {
-        nameText.text = fullName;
-        jobText.text = job;
-        companyText.text = company;
+        nameText.text = profile.surname + " " + profile.name;
+        jobText.text = profile.username;
+        companyText.text = "VR SQUAD";
 
-        profileImage.sprite = profileImg;
-
-        if(buttonClicked != null)
-             buttonClicked.SetActive(true);
-
-        buttonClicked = clickOrigin;
-        buttonClicked.SetActive(false);
+        profileImage.sprite = Sprite.Create(profile.profileImg, new Rect(0f,0f, profile.profileImg.width, profile.profileImg.height), Vector2.zero);
     }
 }
