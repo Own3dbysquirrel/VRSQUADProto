@@ -37,23 +37,6 @@ public class ChangeRoom : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        if (OVRInput.GetDown(OVRInput.Button.DpadUp) || Input.GetKeyDown(KeyCode.X))
-        {
-            GoToRoom(1);
-        }
-
-
-        if (OVRInput.GetDown(OVRInput.Button.DpadDown) || Input.GetKeyDown(KeyCode.W))
-        {
-            GoToRoom(0);
-        }
-
-    }
-
     public void GoToRoom(int i)
     {
         StartCoroutine(FadeInOut(i));
@@ -62,11 +45,12 @@ public class ChangeRoom : MonoBehaviour
 
    IEnumerator FadeInOut(int i)
     {
+        Color tempcolor;
 
         // Fade In
         while (blackScreen.color.a < 1)
         {
-            var tempcolor = blackScreen.color;
+            tempcolor = blackScreen.color;
             tempcolor.a += 0.025f;
             blackScreen.color = tempcolor;
             yield return new WaitForSeconds(0.025f);
@@ -85,7 +69,7 @@ public class ChangeRoom : MonoBehaviour
         // Fade Out
         while (blackScreen.color.a > 0)
         {
-            var tempcolor = blackScreen.color;
+            tempcolor = blackScreen.color;
             tempcolor.a -= 0.025f;
             blackScreen.color = tempcolor;
             yield return new WaitForSeconds(0.025f);

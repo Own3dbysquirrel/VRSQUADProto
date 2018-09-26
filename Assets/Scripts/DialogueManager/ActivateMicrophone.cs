@@ -4,41 +4,7 @@ using UnityEngine;
 
 public class ActivateMicrophone : StateMachineBehaviour {
 
-    public int recordDuration;
-    private int _sampleWindow = 128;
-
-    public string companyName;
-    public string userName;
-    public string formationName;
-
     private DialogueManager npcDialogueManager;
-
-    private AudioClip newAudioClip;
-
-    private string fileName;
-
-    /*
-    float LevelMax()
-    {
-
-        float levelMax = 0;
-        float[] waveData = new float[_sampleWindow];
-        int micPosition = Microphone.GetPosition(null) - (_sampleWindow + 1); // null means the first microphone
-        if (micPosition < 0) return 0;
-        newAudioClip.GetData(waveData, micPosition);
-     //   Debug.Log(micPosition);
-        // Getting a peak on the last 128 samples
-        for (int i = 0; i < _sampleWindow; i++)
-        {
-            float wavePeak = waveData[i] * waveData[i];
-            if (levelMax < wavePeak)
-            {
-                levelMax = wavePeak;
-            }
-        }
-        return levelMax;
-    }
-    */
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

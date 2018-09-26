@@ -68,8 +68,7 @@ public class GazeDetection : MonoBehaviour
     {
         tracerLayer = gazeTracers[0].layer;
         foreach (GameObject obj in gazeTracers)
-        {
-            
+        {           
             // Change the layer of the Tracer to Default so it can be visible by the camera;
             obj.layer = 0;
         }
@@ -79,13 +78,19 @@ public class GazeDetection : MonoBehaviour
         cameraScreenshot = I360Render.Capture(screenshotResolution, false, myCamera);
 
       
-        string path = Path.Combine(Application.dataPath, "ScreenGaze.png");
-
+        string path = Path.Combine(Application.persistentDataPath, "ScreenGaze.png");
+        
         File.WriteAllBytes(path, cameraScreenshot);
+
+        StartCoroutine(RevertTracerLayer());
+    }
+
+    IEnumerator RevertTracerLayer()
+    {
+        yield return new WaitForEndOfFrame();
 
         foreach (GameObject obj in gazeTracers)
         {
-
             // Change back the layer of the Tracer to be invisible
             obj.layer = tracerLayer;
             Debug.Log(obj.layer);
